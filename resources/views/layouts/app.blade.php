@@ -100,12 +100,13 @@
 function initSidebar() {
     const sb = document.getElementById('sidebar');
     const ov = document.getElementById('sidebar-overlay');
+    sb.style.transform = '';
     if (window.innerWidth < 768) {
-        sb.style.transform = 'translateX(-100%)';
+        sb.classList.remove('translate-x-0');
+        sb.classList.add('-translate-x-full');
         ov.classList.add('hidden');
         document.body.classList.remove('overflow-hidden');
     } else {
-        sb.style.transform = '';
         ov.classList.add('hidden');
         document.body.classList.remove('overflow-hidden');
     }
@@ -114,10 +115,18 @@ function toggleSidebar() {
     if (window.innerWidth >= 768) return;
     const sb = document.getElementById('sidebar');
     const ov = document.getElementById('sidebar-overlay');
-    const hidden = sb.style.transform === 'translateX(-100%)' || !sb.style.transform;
-    sb.style.transform = hidden ? 'translateX(0)' : 'translateX(-100%)';
-    ov.classList.toggle('hidden', !hidden);
-    document.body.classList.toggle('overflow-hidden', hidden);
+    const isOpen = sb.classList.contains('translate-x-0');
+    if (isOpen) {
+        sb.classList.remove('translate-x-0');
+        sb.classList.add('-translate-x-full');
+        ov.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    } else {
+        sb.classList.remove('-translate-x-full');
+        sb.classList.add('translate-x-0');
+        ov.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+    }
 }
 initSidebar();
 window.addEventListener('resize', initSidebar);

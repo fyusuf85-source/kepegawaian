@@ -31,7 +31,7 @@
                 <p class="text-sm font-bold tracking-tight text-slate-900">PIS HRIS</p>
                 <p class="text-[11px] font-medium text-slate-400">Pesantren Imam Syafi'i</p>
             </div>
-            <button onclick="toggleSidebar()" class="ml-auto rounded-md p-1 text-slate-400 hover:bg-slate-100 lg:hidden">
+            <button onclick="toggleSidebar()" class="ml-auto rounded-md p-1 text-slate-400 hover:bg-slate-100 md:hidden">
                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
         </div>
@@ -100,22 +100,24 @@
 function initSidebar() {
     const sb = document.getElementById('sidebar');
     const ov = document.getElementById('sidebar-overlay');
-    if (window.innerWidth < 1024) {
+    if (window.innerWidth < 768) {
         sb.style.transform = 'translateX(-100%)';
         ov.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
     } else {
-        sb.style.transform = 'translateX(0)';
+        sb.style.transform = '';
         ov.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
     }
 }
 function toggleSidebar() {
+    if (window.innerWidth >= 768) return;
     const sb = document.getElementById('sidebar');
     const ov = document.getElementById('sidebar-overlay');
-    if (window.innerWidth < 1024) {
-        const hidden = sb.style.transform.includes('-100%');
-        sb.style.transform = hidden ? 'translateX(0)' : 'translateX(-100%)';
-        ov.classList.toggle('hidden', !hidden);
-    }
+    const hidden = sb.style.transform === 'translateX(-100%)' || !sb.style.transform;
+    sb.style.transform = hidden ? 'translateX(0)' : 'translateX(-100%)';
+    ov.classList.toggle('hidden', !hidden);
+    document.body.classList.toggle('overflow-hidden', hidden);
 }
 initSidebar();
 window.addEventListener('resize', initSidebar);

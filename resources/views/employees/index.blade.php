@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => 'Data Pegawai', 'heading' => 'Data Pegawai', 'subheading' => 'Daftar pegawai sesuai cakupan akses Anda'])
 
 @section('content')
-    <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+    <div class="flex flex-col gap-4">
         <form method="GET" class="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
             <input name="q" value="{{ request('q') }}" placeholder="Nama, NIP, atau email"
                    class="rounded-lg border border-slate-300 px-3 py-2 text-sm">
@@ -23,19 +23,24 @@
                     <option value="{{ $id }}" @selected((string) request('org_unit_id') === (string) $id)>{{ $name }}</option>
                 @endforeach
             </select>
-            <button class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm hover:bg-slate-50">Terapkan</button>
+            <button class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Terapkan</button>
         </form>
 
-        <div class="flex flex-wrap gap-2">
-            @if($canImport)
-                <a href="{{ route('employees.import.form') }}" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm hover:bg-slate-50">Impor Excel</a>
-            @endif
-            @if($canExport)
-                <a href="{{ route('employees.export') }}" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm hover:bg-slate-50">Ekspor Excel</a>
-            @endif
-            @if($canCreate)
-                <a href="{{ route('employees.create') }}" class="rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800">Tambah Pegawai</a>
-            @endif
+        <div class="flex items-center justify-between gap-3">
+            <div class="text-sm text-slate-500">
+                Total: <span class="font-semibold text-slate-900">{{ $employees->total() }}</span> pegawai
+            </div>
+            <div class="flex gap-2">
+                @if($canImport)
+                    <a href="{{ route('employees.import.form') }}" class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Impor</a>
+                @endif
+                @if($canExport)
+                    <a href="{{ route('employees.export') }}" class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">Ekspor</a>
+                @endif
+                @if($canCreate)
+                    <a href="{{ route('employees.create') }}" class="inline-flex items-center justify-center rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800">Tambah Pegawai</a>
+                @endif
+            </div>
         </div>
     </div>
 

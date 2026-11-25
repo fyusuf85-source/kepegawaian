@@ -11,13 +11,16 @@ class ProfileController extends Controller
     {
         $employee = $request->user()->employee;
 
-        abort_unless($employee, 404, 'Akun Anda belum terhubung dengan data pegawai.');
+        if ($employee) {
+            $employee->load([
+                'orgUnit', 'position', 'workLocation', 'supervisor',
+                'families', 'educations.education', 'bankAccounts', 'documents',
+            ]);
+        }
 
-        $employee->load([
-            'orgUnit', 'position', 'workLocation', 'supervisor',
-            'families', 'educations.education', 'bankAccounts', 'documents',
+        return view('profile.show', [
+            'employee' => $employee,
+            'user' => $request->user(),
         ]);
-
-        return view('profile.show', compact('employee'));
     }
 }

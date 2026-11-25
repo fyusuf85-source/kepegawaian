@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => 'Keuangan Pribadi', 'heading' => 'Reimbursement & Pinjaman', 'subheading' => 'Pengajuan klaim biaya dan pinjaman kasbon pegawai'])
 
 @section('content')
-    <div class="grid gap-6 lg:grid-cols-2">
+    <div class="grid gap-6 xl:grid-cols-2">
         <!-- Reimbursement Form -->
         <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <h3 class="text-base font-semibold text-slate-900">Ajukan Reimbursement</h3>
@@ -29,7 +29,7 @@
                     <label class="block text-xs font-medium text-slate-700">Lampiran (Nota/Kwitansi PDF/Gambar)</label>
                     <input type="file" name="attachment" accept=".pdf,.jpg,.jpeg,.png" class="mt-1 w-full text-xs text-slate-500 file:mr-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-emerald-700 hover:file:bg-emerald-100">
                 </div>
-                <button class="mt-2 rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800">Kirim Reimbursement</button>
+                <button class="mt-2 w-full rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800">Kirim Reimbursement</button>
             </form>
         </div>
 
@@ -52,7 +52,7 @@
                     <label class="block text-xs font-medium text-slate-700">Alasan Peminjaman</label>
                     <textarea name="reason" rows="4" required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"></textarea>
                 </div>
-                <button class="mt-2 rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800">Kirim Pinjaman</button>
+                <button class="mt-2 w-full rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800">Kirim Pinjaman</button>
             </form>
         </div>
     </div>
